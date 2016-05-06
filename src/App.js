@@ -1,6 +1,22 @@
-<script type="text/babel">
-    ReactDOM.render(
-    <h1>Hello, world!</h1>,
-    document.getElementById('example')
-    );
-</script>
+ReactDOM.render(
+    <BugList />,
+    document.getElementById('main')
+);
+
+/*import React from "react"
+
+export default class BugList extends React.Component
+{
+    render()
+    {
+        return(<div>Place Holder Text!</div>);
+    }
+}*/
+
+var BugList = React.createClass({
+  render: function() {
+    return (
+      <div>The bug list would come here.</div>
+    )
+  }
+});
