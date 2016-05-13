@@ -130,24 +130,42 @@ var BugAdd = React.createClass({
   }
 });
 
-var bugData = [{ id: 1, priority: 'P1', status: 'Open', owner: 'Ravan', title: 'App crashes on open' }, { id: 2, priority: 'P2', status: 'New', owner: 'Eddie', title: 'Misaligned border on panel' }];
-
 var BugList = React.createClass({
   displayName: 'BugList',
 
   getInitialState() {
-    return { bugs: bugData };
+    return { bugs: [] };
   },
-  testMethod() {
-    var nextId = this.state.bugs.length + 1;
-    this.addBug({ id: nextId, priority: 'P2', status: 'New', owner: 'Pieta', title: 'Warning on console' });
+  componentDidMount() {
+    $.ajax({
+      url: '/api/bugs',
+      dataType: 'json',
+      cache: false,
+      success: function (data) {
+        this.setState({ bugs: data });
+      }.bind(this),
+      error: function (xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
   },
+  componentWillUnmount() {},
   addBug(bug) {
-    let bugData = this.state.bugs.slice();
-    bug.id = this.state.bugs.length + 1;
-    bugData.push(bug);
-    this.setState({ bugs: bugData });
-    console.log("adding new bug:", bug);
+    $.ajax({
+      url: '/api/bugs',
+      dataType: 'json',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(bug),
+      success: function (data) {
+        let bugsModified = this.state.bugs.concat(data);
+        this.setState({ bugs: bugsModified });
+        console.log("adding new bug:", bug);
+      }.bind(this),
+      error: function (xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
   },
   render: function () {
     return React.createElement(
