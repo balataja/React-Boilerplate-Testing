@@ -45,8 +45,15 @@ var BugList = React.createClass({
       return {bugs: []};
   },
   componentDidMount(){
+    this.loadData();
+  },
+  componentWillUnmount(){
+      
+  },
+  loadData(filter){
     $.ajax({
       url: '/api/bugs',
+      data: filter,
       dataType: 'json',
       cache: false,
       success: function(data) {
@@ -55,10 +62,7 @@ var BugList = React.createClass({
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
       }.bind(this)
-    });
-  },
-  componentWillUnmount(){
-      
+    });  
   },
   addBug(bug){    
     $.ajax({
@@ -81,7 +85,7 @@ var BugList = React.createClass({
     return (
       <div>
         <h1>Bug Tracker</h1>
-        <BugFilter />
+        <BugFilter submitHandler={this.loadData} />
         <hr />
         <BugTable bugs={this.state.bugs}/>
         <hr />
