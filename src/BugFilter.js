@@ -17,7 +17,6 @@ var BugFilter = React.createClass({
           <option value="P2">P2</option>
           <option value="P3">P3</option>
         </select>
-      />
         <button onClick={this.submitHandler({priority: "P1"})}>Test Filter!</button>
       </div>
     )
@@ -27,7 +26,17 @@ var BugFilter = React.createClass({
     var initFilter = this.props.initFilter;
     return {status: initFilter.status, priority: initFilter.priority};
   },
-
+  componentWillReceiveProps(nextProps){
+    if (nextProps.initFilter.status === this.state.status && nextProps.initFilter.priority === this.state.priority)
+    {
+      // No change in URL query
+      return;
+    }
+    this.setState({
+      status: nextProps.initFilter.status, priority: nextProps.initFilter.priority
+    });
+  },
+  
   onChangeStatus: function(e) {
     this.setState({status: e.target.value});
   },
@@ -36,7 +45,10 @@ var BugFilter = React.createClass({
   },
 
   submit: function(e) {
-    this.props.submitHandler({priority: this.state.priority, status: this.state.status});
+    var newFilter = {};
+    if (this.state.priority) newFilter.priority = this.state.priority;
+    if (this.state.status) newFilter.status = this.state.status;
+    this.props.submitHandler(newFilter);
   }
 });
 

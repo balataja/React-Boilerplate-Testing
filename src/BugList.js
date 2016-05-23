@@ -1,6 +1,7 @@
 var $ = require('jquery');
 var react = require('react');
 var reactDOM = require('react-dom');
+var history = require('history');
 
 var BugRow = React.createClass({
   render: function() {
@@ -44,13 +45,26 @@ var BugList = React.createClass({
   getInitialState(){
       return {bugs: []};
   },
-  componentDidMount(){
+  componentDidMount(nextProps){
     this.loadData();
+  },
+  componentWillReceiveProps(nextProps){
+    var newQuery = nextProps.location.query;
+    var oldQuery = this.props.location.query;
+    if(oldQuery.priority === newQuery.priority && oldQuery.status === newQuery.status)
+    {
+      // No change in URL query
+      return;
+    } else {
+      this.loadData();
+    }
   },
   componentWillUnmount(){
       
   },
-  loadData(filter){
+  loadData(){
+    var query = this.props.location.query || {};
+    var filter = {priority: query.priority, status: query.status};
     $.ajax({
       url: '/api/bugs',
       data: filter,
@@ -81,11 +95,14 @@ var BugList = React.createClass({
       }.bind(this)
     });
   },
+  changeFilter(newFilter){
+    this.props.history.push({search: '?' + $.param(newFilter)});
+  },
   render: function() {
     return (
       <div>
         <h1>Bug Tracker</h1>
-        <BugFilter submitHandler={this.loadData} initFilter={this.props.location.query} />
+        <BugFilter submitHandler={this.changeFilter} initFilter={this.props.location.query} />
         <hr />
         <BugTable bugs={this.state.bugs}/>
         <hr />
