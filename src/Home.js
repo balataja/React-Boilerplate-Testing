@@ -6,7 +6,7 @@ import history from 'history';
 export default React.createClass({
    render() {
        return (
-         <div>Main Page!</div>  
+         <p>Main Page!</p>  
        )
    } 
 })

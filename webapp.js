@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var MongoClient = require('mongodb').MongoClient;
+//var MongoClient = require('mongodb').MongoClient;
 
 var app = express();
 var db;
@@ -33,10 +33,10 @@ app.post('/api/bugs', function(req, res, next){
     });
 });
 
-MongoClient.connect('mongodb://localhost/bugsdb', function(err, dbconnection) {
-    db = dbconnection;
+//MongoClient.connect('mongodb://localhost/bugsdb', function(err, dbconnection) {
+//    db = dbconnection;
     var server = app.listen(3000, function(){
         var port = server.address().port;
         console.log('app listening on port', port);
     });
-});
+//});
