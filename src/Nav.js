@@ -21,9 +21,9 @@ export default React.createClass({
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav>
-                            <LinkContainer to={{pathname:'/Random'}}><NavItem eventKey={1}>Random</NavItem></LinkContainer>
-                            <LinkContainer to={{pathname:'/About'}}><NavItem eventKey={2} href="/About">About</NavItem></LinkContainer>
-                            <LinkContainer to={{pathname:'/Guides'}}><NavItem eventKey={3} href="/Guides">Guides</NavItem></LinkContainer>
+                            <LinkContainer to={{pathname:'/Products'}}><NavItem eventKey={1}>Products</NavItem></LinkContainer>
+                            <LinkContainer to={{pathname:'/Account'}}><NavItem eventKey={2}>Account</NavItem></LinkContainer>
+                            <LinkContainer to={{pathname:'/About'}}><NavItem eventKey={3}>About</NavItem></LinkContainer>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>

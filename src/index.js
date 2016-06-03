@@ -1,10 +1,9 @@
 import react from 'react';
 import reactDOM from 'react-dom';
 import App from './App';
-import Home from './Home';
-import Random from './Random';
+import Products from './Products/Products';
+import Account from './Account';
 import About from './About';
-import Guides from './Guides';
 import Error from './Error';
 /*import { Router } from 'react-router';
 import { Route } from 'react-router';
@@ -20,12 +19,11 @@ var hashHistory = ReactRouter.hashHistory;
 reactDOM.render((
   <Router history={hashHistory} >
     <Route path="/" component={App} >
-      <IndexRoute component={Home} />
-      <Route path="Home" component={Home} />
-      <Redirect from="/" to="/Home" />
-      <Route path="Random" component={Random} />
+      <IndexRoute component={Products} />
+      <Route path="Products" component={Products} />
+      <Redirect from="/" to="/Products" />
+      <Route path="Account" component={Account} />
       <Route path="About" component={About} />
-      <Route path="Guides" component={Guides} />
     </Route>
   </Router>), document.getElementById("main")
 );
