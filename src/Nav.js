@@ -7,6 +7,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { NavItem } from 'react-bootstrap';
 import { Navbar } from 'react-bootstrap';
+import { FormGroup } from 'react-bootstrap';
+import { FormControl } from 'react-bootstrap';
 
 export default React.createClass({
     render() {
@@ -15,7 +17,7 @@ export default React.createClass({
                 <Navbar >
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <a href="/">James' Blog</a>
+                            <a href="/">Bull Ship</a>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
@@ -26,6 +28,12 @@ export default React.createClass({
                             <LinkContainer to={{pathname:'/About'}}><NavItem eventKey={3}>About</NavItem></LinkContainer>
                         </Nav>
                     </Navbar.Collapse>
+                    <Navbar.Form pullRight>
+                        <FormGroup>
+                            <FormControl type="text" placeholder="Search" />
+                            <Button type="submit">Submit</Button>
+                        </FormGroup>
+                    </Navbar.Form>
                 </Navbar>
             </section>
         )

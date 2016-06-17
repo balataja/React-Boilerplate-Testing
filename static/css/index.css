@@ -1,0 +1,17 @@
+#main {
+    background-color: lightgrey;
+}
+
+.product {
+    height: 200px;
+    background-color: white;
+    margin: 7px;
+}
+
+.product .image {
+    height: 200px;
+    width: 200px;
+}
+.product .text {
+    margin: 2px;
+}

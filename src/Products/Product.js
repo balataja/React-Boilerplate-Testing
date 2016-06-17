@@ -2,22 +2,22 @@ import react from 'react';
 import reactDOM from 'react-dom';
 import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
+import { Grid } from 'react-bootstrap';
+//import ImageGallery from '../../node_modules/react-image-gallery/src/ImageGallery.jsx';
 
 export default React.createClass({
    render() {
       return (
-        <div className="panel panel-default">
-          <Row className="show-grid">
-            <Col md={4}>
-              <p >{this.props.image}</p>
-            </Col>
-            <Col md={8}>
-              <p >{this.props.title}</p>
+        <Grid>
+          <Row className="show-grid product">
+            <Col xs={4} md={4}><img src={this.props.image}></img></Col>
+            <Col xs={8} md={8}>
+              <h2>{this.props.title}</h2>
               <p >{this.props.price}</p>
               <p >{this.props.desc}</p>
             </Col>
           </Row>
-        </div>
+        </Grid>
       )
    } 
 })
